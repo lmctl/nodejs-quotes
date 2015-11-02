@@ -49,6 +49,8 @@ app.get('/', function (req, res) {
     var prevIndex
     var keyQuery
 
+    console.log(Date() + ' GET /api/quotes (' + querystring.stringify(req.query) + ') request from ' + req.ip)
+
     if (req.query.id) {
 	query._id = req.query.id
         keyQuery = querystring.stringify({'id': req.query.id})
@@ -85,11 +87,14 @@ app.get('/', function (req, res) {
 })
 
 app.get('/api', function (req, res) {
+    console.log(Date() + ' GET /api request from ' + req.ip)
     res.send(helptext_api)
 })
 
 app.get('/api/quotes', function (req, res) {
     var query = { }
+
+    console.log(Date() + ' GET /api/quotes request from ' + req.ip)
 
     if (req.query.id) {
 	query._id = req.query.id
@@ -111,12 +116,10 @@ app.post('/api/quotes', function (req, res, next) {
 
     var docs = []
 
+    console.log(Date() + ' POST /api/quotes request from ' + req.ip)
+
     for (var i = 0; i < req.body.length; i++) {
 	var o = req.body[i]
-
-	console.log('text ' + o.text)
-	console.log('authors ' + o.authors)
-	console.log('date ' + o.date)
 
 	if (o.authors && o.text && o.date) {
 	    var d = Date.now()
@@ -126,9 +129,11 @@ app.post('/api/quotes', function (req, res, next) {
 			timestampAdded: d})
 	} else {
 	    res.status(400).send('Bad request')
+	    console.log(Date() + ' POST /api/quotes FAILED for IP ' + req.ip + ', body: ' + JSON.stringify(req.body))
 	    return
 	}
     }
+    console.log(Date() + ' POST /api/quotes OK for IP ' + req.ip + ', body: ' + JSON.stringify(req.body))
     db.insert(docs, function(err, doc) { })
     res.json(docs)
 })

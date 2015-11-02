@@ -34,12 +34,12 @@ function addquote()
     ea = document.getElementById('nauthors')
 
     q.date = ed.value
-    q.quote = eq.value
+    q.text = eq.value
 
     var a = ea.value
     q.authors = a.split(/\s*,\s*/)
 
-    if (q.quote == null || q.quote == "") {
+    if (q.text == null || q.text == "") {
 	eq.className = "error"
 	isErr = true
     } else

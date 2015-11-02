@@ -1,4 +1,4 @@
-var quotesPerPage = 10
+var quotesPerPage = 20
 
 // packages
 var querystring = require('querystring')

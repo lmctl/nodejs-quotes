@@ -36,7 +36,7 @@ var helptext_api = {
 		"method": "GET",
 		"href": "/api/quotes?date=YYYY-MM-DD&author=AUTHORID",
 	    },
-	} 
+	}
     }
 }
 
@@ -88,7 +88,7 @@ app.get('/api', function (req, res) {
     res.send(helptext_api)
 })
 
-app.get('/api/quotes/', function (req, res) {
+app.get('/api/quotes', function (req, res) {
     var query = { }
 
     if (req.query.id) {

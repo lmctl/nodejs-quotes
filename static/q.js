@@ -29,9 +29,9 @@ function addquote()
     var q = {}
     var isErr = false
 
-    ed = document.getElementById('ndate')
-    eq = document.getElementById('nquote')
-    ea = document.getElementById('nauthors')
+    var ed = document.getElementById('ndate')
+    var eq = document.getElementById('nquote')
+    var ea = document.getElementById('nauthors')
 
     q.date = ed.value
     q.text = eq.value
@@ -60,6 +60,18 @@ function addquote()
     if (isErr)
 	return
 
-
-
+    var x = new XMLHttpRequest()
+    x.open('POST', '/api/quotes')
+    x.onreadystatechange = function () {
+	if (x.readyState != XMLHttpRequest.DONE)
+	    return
+	if (x.status != 200)
+	    document.getElementById('errorMark').style.display = "inline"
+	else {
+	    document.getElementById('errorMark').style.display = "none"
+	    location.reload()
+	}
+    }
+    x.setRequestHeader('Content-Type', 'application/json; charset=utf-8')
+    x.send(JSON.stringify([ q ]))
 }

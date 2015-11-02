@@ -56,7 +56,7 @@ input[type=text]:focus {
     display: none;
 }
 
-.error {
+#errorMark, .error {
     background: #fcc;
     border-color: red;
 }

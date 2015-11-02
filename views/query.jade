@@ -18,6 +18,8 @@ body
       input#nauthors(type='text')
       input#ndate(type='text')
       a.commonlink#addlink(href="#", onclick="addquote()") +++
+      | 
+      span.hidden#errorMark FAIL
   each article in doc
     p
       div.quote

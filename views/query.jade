@@ -1,0 +1,34 @@
+doctype html
+html
+  head
+    title #{title}
+    meta(charset='utf-8')
+    link(rel='stylesheet', href='/static/style.css')
+    script(src='/static/q.js') */
+body
+  h1 #{title}
+  nav
+    a.commonlink(href="#{keyQuery}&index=#{prevIndex}") <
+    a.commonlink(href="/")  /\ 
+    a.commonlink(href="#{keyQuery}&index=#{nextIndex}") >
+    |  
+    a.commonlink#plus(href="#", onclick="showNew()") +
+    span.hidden#newquote
+      input#nquote(type='text')
+      input#nauthors(type='text')
+      input#ndate(type='text')
+      a.commonlink#addlink(href="#", onclick="addquote()") +++
+  each article in doc
+    p
+      div.quote
+        a.commonlink(href='?id=#{article._id}') #
+        |  #{article.text}
+      div.metadata
+        if (article.authors)
+          | --
+          each author in article.authors
+            | 
+            a.authorlink(href='?author=#{author}') #{author}
+        if (article.date)
+          |, 
+          a.datelink(href='?date=#{article.date}') #{article.date}

@@ -119,9 +119,11 @@ app.post('/api/quotes', function (req, res, next) {
 	console.log('date ' + o.date)
 
 	if (o.authors && o.text && o.date) {
+	    var d = Date.now()
 	    docs.push({	authors: o.authors,
 			text: o.text,
-			date: o.date})
+			date: o.date,
+			timestampAdded: d})
 	} else {
 	    res.status(400).send('Bad request')
 	    return

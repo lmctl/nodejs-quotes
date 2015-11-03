@@ -49,7 +49,7 @@ app.get('/', function (req, res) {
     var prevIndex
     var keyQuery
 
-    console.log(Date() + ' GET /api/quotes (' + querystring.stringify(req.query) + ') request from ' + req.ip)
+    console.log(Date() + ' GET / (' + querystring.stringify(req.query) + ') request from ' + req.ip)
 
     if (req.query.id) {
 	query._id = req.query.id

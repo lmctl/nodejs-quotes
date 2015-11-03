@@ -1,0 +1,16 @@
+#!/bin/sh
+
+exec </dev/null
+exec >>access.log
+exec 2>&1
+
+# wait long enogh to notice something is wrong
+waitsecs=60
+
+while : ;
+do
+    echo "$(date -R) Starting server."
+    nodejs ./q-server.js
+    echo "$(date -R) Server finished with error code $?.  Waiting for ${waitsecs} seconds..."
+    sleep $waitsecs
+done

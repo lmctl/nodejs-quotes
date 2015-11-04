@@ -94,7 +94,7 @@ app.get('/api', function (req, res) {
 app.get('/api/quotes', function (req, res) {
     var query = { }
 
-    console.log(Date() + ' GET /api/quotes request from ' + req.ip)
+    console.log(Date() + ' GET /api/quotes (' + querystring.stringify(req.query) + ') request from ' + req.ip)
 
     if (req.query.id) {
 	query._id = req.query.id
